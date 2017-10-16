@@ -6,7 +6,9 @@
 package com.boot.demo.controller;
 
 import com.boot.demo.handler.PDFHandler;
+import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.DocumentException;
+import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,7 +27,7 @@ public class DocumentController {
     private PDFHandler pdfHandler;
     
     	@RequestMapping(path = "documents", method = GET, produces = MediaType.APPLICATION_PDF_VALUE)
-	ResponseEntity<?> submitPayment() throws DocumentException {
+	ResponseEntity<?> submitPayment() throws DocumentException, BadElementException, IOException {
 
 	        byte[] file = pdfHandler.createPDF();
                 
