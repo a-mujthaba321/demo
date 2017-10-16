@@ -11,11 +11,7 @@ import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.UUID;
+import java.io.ByteArrayOutputStream;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -25,12 +21,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PDFHandler {
 
-    public void createPDF() {
+    public byte[] createPDF() throws DocumentException {
         Document document = new Document();
         String FILE_NAME = "C://Users/NCIT/Documents/pdfDocs/";
-        try {
-
-            PdfWriter.getInstance(document, new FileOutputStream(new File(FILE_NAME + UUID.randomUUID() + ".pdf")));
+   
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            PdfWriter.getInstance(document, byteArrayOutputStream);
 
             //open
             document.open();
@@ -54,14 +50,12 @@ public class PDFHandler {
 
             //close
             document.close();
+            
+            return byteArrayOutputStream.toByteArray();
 
-            System.out.println("Done");
+     
 
-        } catch (FileNotFoundException | DocumentException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       
     }
 
 }

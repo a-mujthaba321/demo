@@ -6,6 +6,7 @@
 package com.boot.demo.controller;
 
 import com.boot.demo.handler.PDFHandler;
+import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,11 +25,11 @@ public class DocumentController {
     private PDFHandler pdfHandler;
     
     	@RequestMapping(path = "documents", method = GET, produces = MediaType.APPLICATION_PDF_VALUE)
-	ResponseEntity<?> submitPayment() {
+	ResponseEntity<?> submitPayment() throws DocumentException {
 
-	        pdfHandler.createPDF();
+	        byte[] file = pdfHandler.createPDF();
                 
-		return new ResponseEntity<>(null, HttpStatus.CREATED);
+		return new ResponseEntity<>(file, HttpStatus.OK);
 	}
     
 }
