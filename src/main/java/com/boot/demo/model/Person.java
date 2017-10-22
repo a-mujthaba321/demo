@@ -5,19 +5,22 @@
  */
 package com.boot.demo.model;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import lombok.Data;
+import org.springframework.hateoas.Identifiable;
 
 /**
  *
  * @author Ali Mujthaba
  */
 @Data
-@Entity
-public abstract class Person {
+@MappedSuperclass
+public abstract class Person implements Serializable, Identifiable<Long> {
 
     @Id
     @GeneratedValue

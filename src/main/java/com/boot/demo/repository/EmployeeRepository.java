@@ -5,15 +5,13 @@
  */
 package com.boot.demo.repository;
 
-import com.boot.demo.model.Person;
+import com.boot.demo.model.Employee;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 /**
  *
  * @author Ali Mujthaba
  */
-@RepositoryRestResource(collectionResourceRel = "persons", path = "persons", itemResourceRel = "persons")
-public interface PersonRepository extends PagingAndSortingRepository<Person, Long>{
-    
-}
+//public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long>{
+//    
+//}

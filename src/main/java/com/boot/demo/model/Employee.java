@@ -5,6 +5,7 @@
  */
 package com.boot.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.Entity;
 import lombok.Data;
 
@@ -14,8 +15,10 @@ import lombok.Data;
  */
 @Data
 @Entity
-public class Employee extends Person {
+public class Employee extends Person{
 
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String employeeNumber;
 
 }

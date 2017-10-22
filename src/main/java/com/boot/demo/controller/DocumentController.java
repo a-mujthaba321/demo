@@ -5,6 +5,7 @@
  */
 package com.boot.demo.controller;
 
+import com.boot.demo.handler.ExcelHandler;
 import com.boot.demo.handler.PDFHandler;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.DocumentException;
@@ -23,15 +24,27 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class DocumentController {
+
     @Autowired
     private PDFHandler pdfHandler;
     
-    	@RequestMapping(path = "documents", method = GET, produces = MediaType.APPLICATION_PDF_VALUE)
-	ResponseEntity<?> submitPayment() throws DocumentException, BadElementException, IOException {
+    @Autowired
+    private ExcelHandler excelHandler;
 
-	        byte[] file = pdfHandler.createPDF();
-                
-		return new ResponseEntity<>(file, HttpStatus.OK);
-	}
-    
+    @RequestMapping(path = "documents", method = GET, produces = MediaType.APPLICATION_PDF_VALUE)
+    ResponseEntity<?> submitPayment() throws DocumentException, BadElementException, IOException {
+
+        byte[] file = pdfHandler.createPDF();
+
+        return new ResponseEntity<>(file, HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "documents/excel", method = GET, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    ResponseEntity<?> generateExcel()  {
+
+        excelHandler.generateExcel();
+
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
 }
